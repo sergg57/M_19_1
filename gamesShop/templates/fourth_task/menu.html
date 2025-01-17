@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Шаблон</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% block pagename %}
+        <h1>Главная страница</h1>
+    {% endblock pagename %}
+
+    {% block menu %}
+         <a href="/platform">Главная</a><br>
+         <a href="/platform/games">Игры</a><br>
+         <a href="/platform/cart">Корзина</a><br>
+    {% endblock menu %}
+
+    {% block context %}
+        <ul>
+            {% for item in game %}
+            <li>
+                {% for i in item %}
+                    {% if i == item.0 %}  {{ i }} |  {% endif %}
+                    {% if i == item.1 %}  {{ i }}.  {% endif %}
+                    {% if i == item.2 %} Стоимость: {{ i }} {% endif %}
+                {% endfor %}
+                <button>Купить</button>
+            </li>
+            {% endfor %}
+        </ul>
+        <h2>{{ content }}</h2>
+    {% endblock context %}
+
+</body>
+</html>
